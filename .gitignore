@@ -5,3 +5,6 @@ packrat/src/
 *.osm
 *.osm.pbf
 .Rproj.user
+
+# .env
+.env

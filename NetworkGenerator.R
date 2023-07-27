@@ -1,17 +1,38 @@
-makeNetwork<-function(outputFileName="test"){
+#'
+#' @param processOsm A flag for whether process raw osm extract or not
+#'   (default = F)
+#' @param osmExtract If processOsm=T, Set this to your osm extract file name,
+#'   e.g., melbourne.osm
+#' @param networkSqlite
+#' @param outputCRS
+#' @param outputFileName
+#' @param writeXML flag to write XML output (default = T)
+#' @param writeShp flag to write Shp output (default = F)
+#' @param writeSql flag to write Sql output (default = F)
+makeNetwork<-function(
+    processOsm = T, #F
+    osmExtract = './data/beaumont-complete.osm', #, './data/melbourne.osm',
+    networkSqlite = './data/network.sqlite',
+    outputCrs = 26914, #28355,
+    outputFileName="network",
+    writeXml=T,
+    writeShp=F,
+    writeSqlite=F
+    ) {
+  
   # outputFileName="network"
   # Parameters --------------------------------------------------------------
   
   # INPUT NETWORK 
   # Set this to your desired cooridinate system for the network
-  outputCrs=28355
+  #outputCrs=28355
   # A flag for whether process raw osm extract or not
-  processOsm=F
+  #processOsm=F
   # If processOsm=T, Set this to your osm extract file name, e.g., melbourne.osm
   # Note that osm.pbf format is not yet supported
-  osmExtract='./data/melbourne.osm'
+  #osmExtract='./data/melbourne.osm'
   # If procesOsm=F, set the following to the network sqlite file
-  networkSqlite="data/network.sqlite"
+  #networkSqlite="data/network.sqlite"
 
   # SIMPLIFICATION
   shortLinkLength=20
@@ -52,9 +73,9 @@ makeNetwork<-function(outputFileName="test"){
   if(exists("outputFileName")){
     outputFileName=outputFileName
   }else{outputFileName="test"}
-  writeXml=F
-  writeShp=F
-  writeSqlite=T
+  #writeXml=T
+  #writeShp=F
+  #writeSqlite=F
 
   # Packages ----------------------------------------------------------------
 
@@ -100,8 +121,10 @@ makeNetwork<-function(outputFileName="test"){
   echo("                **Launching Network Generation**        \n")
   echo("--------------------------------------------------------\n")
   
+  print(paste0("class of processOsm=",class(processOsm)))
+  print(paste0("processOsm=",processOsm))
   # Processing OSM
-  if(processOsm){
+  if(processOsm) {
     echo(paste0("Starting to process osm extract file, ", osmExtract,"\n"))
     echo(paste0("This might take a while depending on your OSM extract size, ", osmExtract,"\n"))
     echo(paste0("Output coordinate system: ", outputCrs, "\n"))
