@@ -5,6 +5,10 @@ packrat/src/
 *.osm
 *.osm.pbf
 .Rproj.user
+.Rhistory
 
 # .env
 .env
+
+# output/
+output/

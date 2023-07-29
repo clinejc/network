@@ -62,7 +62,7 @@ densifyNetwork <- function(networkList, minimum_length=400, densifyBikeways=F){
   }
   
   links_segmented <- links_to_segmentize %>%
-    st_set_geometry(st_sfc(links_list_segmented)) %>%
+    st_set_geometry(st_sfc(links_list_segmented, crs = st_crs(links_to_segmentize))) %>%
     mutate(group_id=row_number()) %>%
     st_snap_to_grid(1) %>%
     st_sf() %>%
